@@ -1,0 +1,1210 @@
+/* ==========================================
+   1. ROOT DAN PENGATURAN DASAR
+========================================== */
+
+@property --s1 {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #bfe3f5;
+}
+
+@property --s2 {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #e9f6ee;
+}
+
+@property --s3 {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #fdf1d4;
+}
+
+@property --h1 {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #b8d9a0;
+}
+
+@property --h2 {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #8cc08a;
+}
+
+@property --h3 {
+    syntax: '<color>';
+    inherits: true;
+    initial-value: #5f9f78;
+}
+
+:root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+    scroll-padding-top: env(safe-area-inset-top, 0px);
+    scroll-behavior: smooth;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    max-width: 100%;
+    overflow-x: hidden;
+
+    font-family: 'Quicksand', 'Outfit', system-ui, sans-serif;
+    color: var(--ink);
+    background: #bfe3f5;
+    line-height: 1.6;
+    overflow-wrap: break-word;
+
+    transition:
+        --s1 1.6s,
+        --s2 1.6s,
+        --s3 1.6s,
+        --h1 1.6s,
+        --h2 1.6s,
+        --h3 1.6s,
+        color 1s;
+}
+
+svg,
+img {
+    max-width: 100%;
+}
+
+
+/* ==========================================
+   2. TEMA BERDASARKAN WAKTU
+========================================== */
+
+/* Tema pagi */
+body[data-time="pagi"] {
+    --s1: #bfe3f5;
+    --s2: #e9f6ee;
+    --s3: #fdf1d4;
+
+    --h1: #b8d9a0;
+    --h2: #8cc08a;
+    --h3: #5f9f78;
+
+    --orb: #fff3b0;
+    --ox: 16%;
+    --oy: 20%;
+
+    --glass: rgba(255, 255, 255, .36);
+    --ink: #1f3a2e;
+    --gb: rgba(255, 255, 255, .75);
+
+    --cloud: .9;
+    --stars: 0;
+}
+
+/* Tema siang */
+body[data-time="siang"] {
+    --s1: #6ec1f0;
+    --s2: #bfe6fb;
+    --s3: #eaf8ff;
+
+    --h1: #9fd17f;
+    --h2: #6fb86a;
+    --h3: #3f9560;
+
+    --orb: #fffbd0;
+    --ox: 62%;
+    --oy: 10%;
+
+    --glass: rgba(255, 255, 255, .36);
+    --ink: #14342a;
+    --gb: rgba(255, 255, 255, .75);
+
+    --cloud: 1;
+    --stars: 0;
+}
+
+/* Tema senja */
+body[data-time="senja"] {
+    --s1: #6a5fa8;
+    --s2: #e58f8a;
+    --s3: #fcc98a;
+
+    --h1: #a3a56d;
+    --h2: #6f8f5f;
+    --h3: #3f6b55;
+
+    --orb: #ffd29a;
+    --ox: 78%;
+    --oy: 46%;
+
+    --glass: rgba(40, 25, 50, .42);
+    --ink: #fff3ea;
+    --gb: rgba(255, 255, 255, .35);
+
+    --cloud: .65;
+    --stars: 0;
+}
+
+/* Tema malam */
+body[data-time="malam"] {
+    --s1: #0b1530;
+    --s2: #1c2b5a;
+    --s3: #34467c;
+
+    --h1: #2f4a4f;
+    --h2: #223c47;
+    --h3: #172c3a;
+
+    --orb: #f4f1d8;
+    --ox: 80%;
+    --oy: 16%;
+
+    --glass: rgba(14, 22, 48, .5);
+    --ink: #eef2ff;
+    --gb: rgba(255, 255, 255, .28);
+
+    --cloud: .22;
+    --stars: 1;
+}
+
+
+/* ==========================================
+   3. BACKGROUND DAN ANIMASI ALAM
+========================================== */
+
+/* Langit */
+.sky {
+    position: fixed;
+    inset: 0;
+    z-index: -4;
+
+    background: linear-gradient(
+        180deg,
+        var(--s1),
+        var(--s2) 58%,
+        var(--s3)
+    );
+}
+
+/* Bintang */
+.stars {
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+
+    opacity: var(--stars);
+    transition: opacity 1.6s;
+
+    background:
+        radial-gradient(1.5px 1.5px at 12% 18%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 30% 8%, #fff, transparent),
+        radial-gradient(2px 2px at 48% 26%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 66% 12%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 90% 30%, #fff, transparent),
+        radial-gradient(1.5px 1.5px at 22% 38%, #fff, transparent),
+        radial-gradient(2px 2px at 74% 40%, #fff, transparent);
+}
+
+/* Matahari dan bulan */
+.orb {
+    position: fixed;
+    z-index: -3;
+
+    width: 84px;
+    height: 84px;
+
+    border-radius: 50%;
+    left: var(--ox);
+    top: var(--oy);
+
+    background: var(--orb);
+
+    box-shadow:
+        0 0 60px 24px color-mix(
+            in srgb,
+            var(--orb) 60%,
+            transparent
+        );
+
+    transition:
+        left 1.6s,
+        top 1.6s,
+        background 1.6s;
+}
+
+/* Awan */
+.cloud {
+    position: fixed;
+    z-index: -2;
+
+    width: 280px;
+    height: 90px;
+    left: -320px;
+
+    opacity: var(--cloud);
+    filter: blur(2px);
+
+    background:
+        radial-gradient(
+            ellipse at 28% 62%,
+            #fff 0 38%,
+            transparent 40%
+        ),
+        radial-gradient(
+            ellipse at 52% 42%,
+            #fff 0 46%,
+            transparent 48%
+        ),
+        radial-gradient(
+            ellipse at 76% 64%,
+            #fff 0 36%,
+            transparent 38%
+        );
+
+    animation: drift linear infinite;
+    transition: opacity 1.6s;
+}
+
+.c1 {
+    top: 12%;
+    animation-duration: 110s;
+}
+
+.c2 {
+    top: 26%;
+    animation-duration: 150s;
+    animation-delay: -60s;
+    transform: scale(1.3);
+}
+
+.c3 {
+    top: 6%;
+    animation-duration: 190s;
+    animation-delay: -120s;
+    transform: scale(.8);
+}
+
+@keyframes drift {
+    to {
+        left: 110vw;
+    }
+}
+
+/* Bukit */
+.hills {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 42vh;
+
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Daun dan partikel */
+.leaf {
+    position: fixed;
+    top: -20px;
+    z-index: 1;
+
+    width: 12px;
+    height: 8px;
+
+    border-radius: 0 80% 0 80%;
+    opacity: .85;
+
+    pointer-events: none;
+
+    animation: fall linear forwards;
+}
+
+.leaf.glow {
+    width: 5px;
+    height: 5px;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px 3px rgba(255, 240, 150, .8);
+}
+
+@keyframes fall {
+    to {
+        transform: translate(var(--dx), 112vh) rotate(540deg);
+    }
+}
+
+
+/* ==========================================
+   4. EFEK GLASSMORPHISM
+========================================== */
+
+.glass {
+    background: var(--glass);
+
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+    border: 1px solid var(--gb);
+
+    box-shadow:
+        0 8px 32px rgba(20, 40, 60, .18),
+        inset 0 1px 0 rgba(255, 255, 255, .45);
+
+    transition:
+        background 1.6s,
+        border-color 1.6s;
+}
+
+
+/* ==========================================
+   5. NAVIGASI UTAMA
+========================================== */
+
+nav {
+    position: sticky;
+    top: calc(10px + env(safe-area-inset-top, 0px));
+    z-index: 10;
+
+    width: min(900px, calc(100% - 24px));
+    margin: 10px auto 0;
+    padding: 10px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 999px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: 'Lora', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+nav div {
+    display: flex;
+    gap: 6px;
+}
+
+nav a,
+button {
+    font: inherit;
+    color: inherit;
+}
+
+nav a {
+    padding: 6px 14px;
+
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    background: rgba(255, 255, 255, .25);
+    outline: none;
+}
+
+
+/* ==========================================
+   6. KONTEN UTAMA
+========================================== */
+
+main {
+    position: relative;
+    z-index: 2;
+
+    width: min(780px, calc(100% - 24px));
+    margin: 0 auto;
+    padding: 28px 0 150px;
+
+    display: grid;
+    gap: 18px;
+}
+
+.card {
+    padding: 26px;
+    border-radius: 28px;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0;
+
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 5vw, 2.7rem);
+}
+
+h2 {
+    margin-bottom: 12px;
+    font-size: 1.35rem;
+}
+
+.hero p {
+    max-width: 56ch;
+    margin: 12px 0 0;
+    font-size: 1.05rem;
+}
+
+/* Ayat Al-Qur'an */
+.ayat {
+    margin-top: 14px;
+
+    font-family: 'Amiri', serif;
+    font-size: 1.5rem;
+
+    direction: rtl;
+}
+
+
+/* ==========================================
+   7. PEMUTAR KAJIAN
+========================================== */
+
+.screen {
+    position: relative;
+
+    aspect-ratio: 16 / 9;
+    padding: 16px;
+
+    display: grid;
+    place-items: center;
+
+    overflow: hidden;
+    text-align: center;
+
+    border: 1px solid var(--gb);
+    border-radius: 20px;
+
+    background: linear-gradient(
+        180deg,
+        var(--s1),
+        var(--s3)
+    );
+}
+
+.screen::after {
+    content: "";
+
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -30%;
+
+    height: 60%;
+
+    border-radius: 50%;
+    background: var(--h2);
+}
+
+.screen > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Label player */
+.screen .tag {
+    position: absolute;
+    top: 10px;
+    left: 12px;
+    z-index: 2;
+
+    padding: 3px 10px;
+
+    border-radius: 99px;
+    background: var(--glass);
+
+    font-size: .75rem;
+}
+
+/* Tombol play besar */
+.big {
+    width: 68px;
+    height: 68px;
+
+    border: 1px solid var(--gb);
+    border-radius: 50%;
+
+    background: var(--glass);
+    backdrop-filter: blur(14px);
+
+    font-size: 1.6rem;
+    cursor: pointer;
+}
+
+.big:hover {
+    background: rgba(255, 255, 255, .34);
+}
+
+.screen h3 {
+    margin-top: 10px;
+    font-size: 1.1rem;
+
+    text-shadow: 0 1px 8px var(--glass);
+}
+
+
+/* YouTube IFrame API */
+.screen.yt::after {
+    display: none;
+}
+
+.screen #yt {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.screen .overlay {
+    z-index: 2;
+    max-width: 100%;
+    transition: opacity .3s;
+}
+
+.screen .overlay h3 {
+    display: inline-block;
+    max-width: 92%;
+    padding: 4px 12px;
+
+    border-radius: 12px;
+    background: var(--glass);
+}
+
+.screen.playing .overlay {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+/* ==========================================
+   8. KONTROL PEMUTAR
+========================================== */
+
+.controls {
+    margin-top: 16px;
+
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+
+    align-items: center;
+    gap: 12px 18px;
+}
+
+/* Tombol mundur, putar, maju */
+.transport {
+    display: flex;
+    gap: 8px;
+}
+
+.ctrl {
+    margin-top: 16px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.ctrl button,
+.transport button,
+.chip {
+    padding: 8px 14px;
+
+    border: 1px solid var(--gb);
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, .18);
+
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.ctrl button:hover,
+.transport button:hover,
+.chip:hover {
+    background: rgba(255, 255, 255, .34);
+}
+
+/* Progress bar */
+.progress {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#seek {
+    flex: 1;
+    min-width: 0;
+}
+
+input[type="range"] {
+    accent-color: #6fb86a;
+    cursor: pointer;
+}
+
+.time {
+    min-width: 44px;
+
+    font-size: .85rem;
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ==========================================
+   9. DAFTAR KAJIAN
+========================================== */
+
+.list {
+    display: grid;
+    gap: 8px;
+}
+
+.item {
+    width: 100%;
+    padding: 12px 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    border: 1px solid transparent;
+    border-radius: 16px;
+
+    background: rgba(255, 255, 255, .12);
+
+    text-align: left;
+    cursor: pointer;
+}
+
+.item:hover {
+    background: rgba(255, 255, 255, .24);
+}
+
+.item.on {
+    border-color: var(--gb);
+    background: rgba(255, 255, 255, .3);
+}
+
+.item small {
+    display: block;
+    opacity: .8;
+}
+
+
+/* ==========================================
+   10. PANEL SUASANA
+========================================== */
+
+#mixer {
+    position: fixed;
+    z-index: 9;
+
+    top: 84px;
+    right: 14px;
+
+    width: 300px;
+    padding: 20px;
+
+    border-radius: 26px;
+
+    transform: translateX(120%);
+    opacity: 0;
+    pointer-events: none;
+
+    transition:
+        transform .45s cubic-bezier(.2, .8, .2, 1),
+        opacity .3s;
+}
+
+#mixer.open {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Kontrol masing-masing suara */
+.ch {
+    margin-top: 14px;
+
+    display: grid;
+    grid-template-columns: 42px 1fr;
+
+    align-items: center;
+    gap: 2px 10px;
+}
+
+.ch button {
+    grid-row: span 2;
+
+    width: 42px;
+    height: 42px;
+
+    border: 1px solid var(--gb);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, .15);
+
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+
+.ch button[aria-pressed="true"] {
+    background: rgba(255, 255, 255, .5);
+
+    box-shadow:
+        0 0 14px rgba(255, 255, 255, .5);
+}
+
+.ch input {
+    width: 100%;
+}
+
+
+/* ==========================================
+   11. MENU NAVIGASI MENGAMBANG
+========================================== */
+
+.dock {
+    position: fixed;
+    z-index: 10;
+
+    left: 50%;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+
+    transform: translateX(-50%);
+
+    padding: 8px;
+
+    display: flex;
+    gap: 4px;
+
+    border-radius: 999px;
+}
+
+.dock button {
+    padding: 8px 14px;
+
+    display: grid;
+    justify-items: center;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: transparent;
+
+    font-size: .72rem;
+    font-weight: 500;
+    line-height: 1.2;
+
+    cursor: pointer;
+}
+
+.dock button span {
+    font-size: 1.2rem;
+}
+
+.dock button:hover,
+.dock button[aria-pressed="true"] {
+    background: rgba(255, 255, 255, .28);
+}
+
+
+/* ==========================================
+   12. HIKMAH HARI INI
+========================================== */
+
+#hikmah {
+    position: fixed;
+    z-index: 8;
+
+    left: 14px;
+    bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+
+    width: min(330px, calc(100% - 28px));
+    padding: 16px 18px 14px;
+
+    border-radius: 22px;
+
+    transform: translateY(30px);
+    opacity: 0;
+    pointer-events: none;
+
+    transition: .5s;
+}
+
+#hikmah.show {
+    transform: none;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#hikmah h3 {
+    font-size: 1rem;
+}
+
+#hikmah p {
+    margin: 6px 0 4px;
+    font-size: .92rem;
+}
+
+#hikmah .x {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+
+    border: 0;
+    background: none;
+
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+
+/* ==========================================
+   13. NOTIFIKASI TOAST
+========================================== */
+
+.toast {
+    position: fixed;
+    z-index: 20;
+
+    left: 50%;
+    top: 84px;
+
+    padding: 9px 18px;
+
+    border-radius: 999px;
+
+    transform: translate(-50%, -20px);
+
+    opacity: 0;
+    pointer-events: none;
+
+    font-weight: 500;
+
+    transition: .35s;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translate(-50%, 0);
+}
+
+
+/* ==========================================
+   14. MODE KHUSYUK
+========================================== */
+
+body.focus nav,
+body.focus .hero,
+body.focus .listcard,
+body.focus #hikmah {
+    display: none;
+}
+
+body.focus main {
+    min-height: 100vh;
+    align-content: center;
+}
+
+
+/* ==========================================
+   15. LAYAR LEBAR
+========================================== */
+
+@media (min-width: 1100px) {
+
+    body {
+        transition:
+            padding-right .45s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    body.mixer-open {
+        padding-right: 324px;
+    }
+}
+
+
+/* ==========================================
+   16. TABLET
+========================================== */
+
+@media (max-width: 900px) {
+
+    .card {
+        padding: 22px;
+    }
+
+    .controls {
+        gap: 12px 14px;
+    }
+
+    .list {
+        grid-template-columns: repeat(
+            auto-fit,
+            minmax(230px, 1fr)
+        );
+    }
+
+    #mixer {
+        width: 280px;
+    }
+}
+
+
+/* ==========================================
+   17. TABLET KECIL DAN PONSEL
+========================================== */
+
+@media (max-width: 720px) {
+
+    nav a:nth-child(3) {
+        display: none;
+    }
+
+    #mixer {
+        left: 12px;
+        right: 12px;
+
+        top: auto;
+        bottom: calc(92px + env(safe-area-inset-bottom, 0px));
+
+        width: auto;
+        max-width: 420px;
+
+        margin: 0 auto;
+        padding: 12px 14px 14px;
+
+        max-height: calc(100dvh - 200px);
+        overflow-y: auto;
+
+        border-radius: 20px;
+
+        transform: translateY(120%);
+    }
+
+    #mixer.open {
+        transform: none;
+    }
+
+    #mixer h2 {
+        margin: 0 0 2px;
+        font-size: 1rem;
+    }
+
+    #chs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 6px 16px;
+    }
+
+    .ch {
+        margin-top: 6px;
+
+        grid-template-columns: 36px 1fr;
+        gap: 0 8px;
+    }
+
+    .ch button {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+    }
+
+    .ch span {
+        font-size: .85rem;
+        line-height: 1.2;
+    }
+
+    .ch input {
+        height: 18px;
+        margin: 0;
+    }
+
+    #mixer p {
+        display: none;
+    }
+
+    #hikmah {
+        bottom: calc(96px + env(safe-area-inset-bottom, 0px));
+    }
+
+    .dock button {
+        padding: 8px 10px;
+    }
+}
+
+
+/* ==========================================
+   18. PONSEL
+========================================== */
+
+@media (max-width: 600px) {
+
+    body {
+        font-size: 16px;
+    }
+
+    /* Pemutar menjadi satu kolom */
+    .controls {
+        grid-template-columns: 1fr;
+    }
+
+    .transport button {
+        flex: 1;
+        min-height: 44px;
+    }
+
+    .progress .time {
+        font-size: .9rem;
+    }
+
+    .ctrl button {
+        min-height: 44px;
+    }
+
+    .screen {
+        padding: 12px;
+    }
+
+    .screen .tag {
+        font-size: .7rem;
+    }
+
+    .big {
+        width: 56px;
+        height: 56px;
+    }
+
+    /* Navigasi */
+    nav {
+        padding: 8px 14px;
+    }
+
+    nav a {
+        padding: 6px 10px;
+    }
+
+    .brand {
+        font-size: 1.05rem;
+    }
+
+    /* Menu bawah */
+    .dock {
+        width: calc(100% - 24px);
+
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 2px;
+        padding: 6px;
+    }
+
+    .dock button {
+        min-width: 0;
+        padding: 8px 4px;
+        font-size: .75rem;
+    }
+
+    .dock button i {
+        max-width: 100%;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Daftar kajian */
+    .list {
+        grid-template-columns: 1fr;
+    }
+
+    .item {
+        padding: 12px 14px;
+    }
+
+    .toast {
+        max-width: calc(100% - 24px);
+        text-align: center;
+    }
+}
+
+
+/* ==========================================
+   19. PONSEL KECIL
+========================================== */
+
+@media (max-width: 380px) {
+
+    nav a:nth-child(1) {
+        display: none;
+    }
+
+    .card {
+        padding: 16px;
+        border-radius: 22px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .ctrl #bmInfo {
+        flex-basis: 100%;
+    }
+}
+
+
+/* ==========================================
+   20. AKSESIBILITAS
+========================================== */
+
+button:focus-visible,
+input:focus-visible,
+a:focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .cloud,
+    .leaf {
+        animation: none;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}

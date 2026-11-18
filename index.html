@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+    <title>RuangKajian</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Quicksand:wght@400;500;600&family=Amiri&display=swap"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body data-time="pagi">
+
+    <!-- Background -->
+    <div class="sky"></div>
+    <div class="stars"></div>
+    <div class="orb"></div>
+
+    <div class="cloud c1"></div>
+    <div class="cloud c2"></div>
+    <div class="cloud c3"></div>
+
+    <svg
+        class="hills"
+        viewBox="0 0 1200 400"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+    >
+        <path
+            d="M0 170 Q220 60 460 150 T900 120 T1200 160 V400 H0Z"
+            fill="var(--h1)"
+        />
+
+        <path
+            d="M0 250 Q260 150 520 240 T1200 220 V400 H0Z"
+            fill="var(--h2)"
+        />
+
+        <path
+            d="M0 330 Q300 260 620 320 T1200 310 V400 H0Z"
+            fill="var(--h3)"
+        />
+    </svg>
+
+    <!-- Navigasi -->
+    <nav class="glass" aria-label="Navigasi utama">
+
+        <span class="brand">
+            <svg
+                width="22"
+                height="22"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+            >
+                <path d="M5 19C5 10 11 4 20 4c0 9-6 15-15 15zM5 19 14 10"/>
+            </svg>
+
+            RuangKajian
+        </span>
+
+        <div>
+            <a href="#beranda">Beranda</a>
+            <a href="#kajian">Kajian</a>
+            <a href="#" id="navMix">Suasana</a>
+        </div>
+
+    </nav>
+
+    <!-- Konten Utama -->
+    <main id="beranda">
+
+        <!-- Hero Section -->
+        <section class="card glass hero">
+
+            <h1>Dengarkan kajian di tengah alam yang damai</h1>
+
+            <p>
+                Pilih kajian, nyalakan suara hujan atau kicau burung,
+                lalu duduk tenang. Latar berubah mengikuti waktu di tempatmu.
+            </p>
+
+            <div class="ayat" lang="ar">
+                أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ
+            </div>
+
+        </section>
+
+        <!-- Pemutar Kajian -->
+        <section
+            class="card glass"
+            id="player"
+            aria-label="Pemutar kajian"
+        >
+
+            <div class="screen yt">
+
+                <!-- Diganti otomatis menjadi iframe oleh YouTube IFrame API -->
+                <div id="yt"></div>
+
+                <div class="overlay">
+                    <button class="big" id="bigPlay" aria-label="Putar">
+                        ▶
+                    </button>
+
+                    <h3 id="ttl"></h3>
+                </div>
+
+            </div>
+
+            <div class="controls">
+
+                <div class="transport">
+                    <button id="back" aria-label="Mundur 10 detik">
+                        −10
+                    </button>
+
+                    <button id="play">
+                        Putar
+                    </button>
+
+                    <button id="fwd" aria-label="Maju 10 detik">
+                        +10
+                    </button>
+                </div>
+
+                <div class="progress">
+
+                    <span class="time" id="cur">0:00</span>
+
+                    <input
+                        type="range"
+                        id="seek"
+                        min="0"
+                        max="1000"
+                        value="0"
+                        aria-label="Posisi kajian"
+                    >
+
+                    <span class="time" id="dur">0:00</span>
+
+                </div>
+
+            </div>
+
+            <div class="ctrl">
+
+                <button id="bm">
+                    🔖 Simpan posisi
+                </button>
+
+                <span id="bmInfo" style="font-size: .85rem"></span>
+
+            </div>
+
+        </section>
+
+        <!-- Daftar Kajian -->
+        <section class="card glass listcard" id="kajian">
+
+            <h2>Daftar kajian</h2>
+
+            <div class="list" id="list"></div>
+
+        </section>
+
+    </main>
+
+    <!-- Mixer Suara Alam -->
+    <aside
+        id="mixer"
+        class="glass"
+        aria-label="Pencampur suara alam"
+    >
+
+        <h2>Suasana</h2>
+
+        <div id="chs"></div>
+    </aside>
+
+    <!-- Hikmah Hari Ini -->
+    <aside id="hikmah" class="glass" aria-live="polite">
+
+        <button class="x" id="hx" aria-label="Tutup">
+            ×
+        </button>
+
+        <h3>Hikmah hari ini</h3>
+
+        <p id="hq"></p>
+
+        <small id="hs"></small>
+
+    </aside>
+
+    <!-- Notifikasi -->
+    <div
+        class="toast glass"
+        id="toast"
+        role="status"
+    ></div>
+
+    <!-- Menu Mengambang -->
+    <div
+        class="dock glass"
+        role="toolbar"
+        aria-label="Menu mengambang"
+    >
+
+        <button id="dMix" aria-pressed="false">
+            <span>☘️</span>
+            Suasana
+        </button>
+
+        <button id="dTime">
+            <span>🕒</span>
+            <i style="font-style: normal" id="tl">Otomatis</i>
+        </button>
+
+        <button id="dFocus" aria-pressed="false">
+            <span>🧘</span>
+            Khusyuk
+        </button>
+
+        <button id="dHik">
+            <span>✨</span>
+            Hikmah
+        </button>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
